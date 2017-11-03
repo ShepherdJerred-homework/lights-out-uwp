@@ -1,7 +1,7 @@
 ﻿using System;
 
 namespace lights_out_uwp {
-    internal class LightsOutGame {
+    class LightsOutGame {
         private bool[,] _grid; // Stores on/off state of cells in g
         private int _numCells = 3; // Number of cells in grid
         private readonly Random _rand; // Used to generate random numbers

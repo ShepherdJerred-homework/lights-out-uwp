@@ -5,12 +5,12 @@
     xmlns:local="using:lights_out_uwp"
     xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
     xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
-    mc:Ignorable="d" Width="500" Height="365">
+    mc:Ignorable="d">
 
     <RelativePanel Background="LightGray">
-        <Canvas Name="CanvasMain" Height="300" RelativePanel.AlignTopWithPanel="True" RelativePanel.AlignRightWithPanel="True" RelativePanel.AlignLeftWithPanel="True" Margin="10, 10, 10, 0"/>
-        <Button Name="ButtonNewGame" Content="New Game" RelativePanel.Below="CanvasMain"  RelativePanel.AlignLeftWith="CanvasMain" Margin="10"/>
+        <Canvas Name="CanvasMain" Width="300" Height="300" RelativePanel.AlignTopWithPanel="True" RelativePanel.AlignRightWithPanel="True" RelativePanel.AlignLeftWithPanel="True" Margin="10, 10, 10, 0"/>
+        <Button Name="ButtonNewGame" Content="New Game" RelativePanel.Below="CanvasMain"  RelativePanel.AlignLeftWith="CanvasMain" Margin="10" Click="ButtonNewGame_OnClick"/>
         <Button Name="ButtonAbout" Content="About" RelativePanel.Below="CanvasMain" RelativePanel.AlignRightWith="CanvasMain"
-                Margin="10" />
+                Margin="10" Click="ButtonAbout_OnClick"/>
     </RelativePanel>
 </Page>

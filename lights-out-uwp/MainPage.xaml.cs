@@ -1,6 +1,9 @@
 ﻿using System;
+using System.Diagnostics;
 using Windows.Foundation;
 using Windows.UI.Popups;
+using Windows.UI.ViewManagement;
+using Windows.UI.Xaml;
 using Windows.UI.Xaml.Controls;
 using Windows.UI.Xaml.Input;
 using Windows.UI.Xaml.Media;
@@ -26,14 +29,17 @@ namespace lights_out_uwp
 
         private void CreateGrid() {
             int rectSize = (int)CanvasMain.Width / _game.NumCells;
+            Debug.WriteLine("Size:" + rectSize);
+            Debug.WriteLine("Width:" + CanvasMain.Width);
+            Debug.WriteLine("Num:" + _game.NumCells);
             CanvasMain.Children.Clear();
             // Create rectangles for grid
             for (int r = 0; r < _game.NumCells; r++) {
                 for (int c = 0; c < _game.NumCells; c++) {
                     Rectangle rect = new Rectangle();
                     rect.Fill = new SolidColorBrush(Windows.UI.Colors.White);
-                    rect.Width = 20;
-                    rect.Height = 20;
+                    rect.Width = rectSize + 1;
+                    rect.Height = rectSize + 1;
                     rect.Stroke = new SolidColorBrush(Windows.UI.Colors.Black);
                     // Store each row and col as a Point
                     rect.Tag = new Point(r, c);
@@ -46,7 +52,7 @@ namespace lights_out_uwp
                     CanvasMain.Children.Add(rect);
                 }
             }
-//            UpdateGridColors();
+            UpdateGridColors();
         }
 
         private void Rect_PointerPressed(object sender, PointerRoutedEventArgs e) {
@@ -86,6 +92,15 @@ namespace lights_out_uwp
                     }
                 }
             }
+        }
+
+        private void ButtonAbout_OnClick(object sender, RoutedEventArgs e) {
+            Frame.Navigate(typeof(About));
+        }
+
+        private void ButtonNewGame_OnClick(object sender, RoutedEventArgs e) {
+            _game.NewGame();
+            UpdateGridColors();
         }
     }
 }
