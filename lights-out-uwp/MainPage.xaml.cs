@@ -45,9 +45,6 @@ namespace lights_out_uwp
 
         private void CreateGrid() {
             int rectSize = (int)CanvasMain.Width / _game.NumCells;
-            Debug.WriteLine("Size:" + rectSize);
-            Debug.WriteLine("Width:" + CanvasMain.Width);
-            Debug.WriteLine("Num:" + _game.NumCells);
             CanvasMain.Children.Clear();
             // Create rectangles for grid
             for (int r = 0; r < _game.NumCells; r++) {
