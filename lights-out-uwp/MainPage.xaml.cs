@@ -1,13 +1,16 @@
 ﻿using System;
 using System.Diagnostics;
 using Windows.Foundation;
+using Windows.Storage;
 using Windows.UI.Popups;
 using Windows.UI.ViewManagement;
 using Windows.UI.Xaml;
 using Windows.UI.Xaml.Controls;
 using Windows.UI.Xaml.Input;
 using Windows.UI.Xaml.Media;
+using Windows.UI.Xaml.Navigation;
 using Windows.UI.Xaml.Shapes;
+using Newtonsoft.Json;
 
 namespace lights_out_uwp
 {
@@ -17,6 +20,7 @@ namespace lights_out_uwp
         public MainPage()
         {
             InitializeComponent();
+            NavigationCacheMode = NavigationCacheMode.Enabled;
 
             _game = new LightsOutGame();
             InitGame();
@@ -25,6 +29,18 @@ namespace lights_out_uwp
         private void InitGame() {
             _game.NewGame();
             CreateGrid();
+        }
+
+        protected override void OnNavigatedFrom(NavigationEventArgs e) {
+            string json = JsonConvert.SerializeObject(_game);
+            ApplicationData.Current.LocalSettings.Values["game"] = json;
+        }
+
+        protected override void OnNavigatedTo(NavigationEventArgs e) {
+            if (ApplicationData.Current.LocalSettings.Values.ContainsKey("username")) {
+                string json = ApplicationData.Current.LocalSettings.Values["game"] as string;
+                _game = JsonConvert.DeserializeObject<LightsOutGame>(json);
+            }
         }
 
         private void CreateGrid() {
